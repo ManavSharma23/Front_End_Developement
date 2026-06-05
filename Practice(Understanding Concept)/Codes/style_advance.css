@@ -1,20 +1,44 @@
-body {
-    background-color: aqua
-        /*comment */
+* {
+    font-size: larger;
+    font-style: italic;
+    font-weight: 170;
+    margin-left: 5px;
 }
+
+/* all */
+
+body {
+    background-image: url('https://wallpapercave.com/wp/wp13414763.jpg');
+    /*comment */
+}
+
+/* only body */
 
 #onepiece_title {
     background-color: blanchedalmond;
     color: rgb(57, 30, 210);
-
+    /* only id with onepiece_title. ,represented by # */
 }
 
 .strawhats {
     background-color: beige;
     color: brown;
+    border: dotted greenyellow;
+    /* only class with strawhats. ,represented by . */
 }
 
 h2.strawhats {
     background-color: rgb(206, 53, 20);
     color: black;
+}
+
+p {
+
+    color: rgb(31, 228, 10);
+}
+
+.Villain {
+    background-color: aqua;
+    color: black;
+    border: dashed red;
 }
