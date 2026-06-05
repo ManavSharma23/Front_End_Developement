@@ -1,0 +1,20 @@
+body {
+    background-color: aqua
+        /*comment */
+}
+
+#onepiece_title {
+    background-color: blanchedalmond;
+    color: rgb(57, 30, 210);
+
+}
+
+.strawhats {
+    background-color: beige;
+    color: brown;
+}
+
+h2.strawhats {
+    background-color: rgb(206, 53, 20);
+    color: black;
+}
