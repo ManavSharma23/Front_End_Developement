@@ -40,5 +40,6 @@ p {
 .Villain {
     background-color: aqua;
     color: black;
+    border-width: medium;
     border: dashed red;
 }
