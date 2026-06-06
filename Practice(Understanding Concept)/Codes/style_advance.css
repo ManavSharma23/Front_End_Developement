@@ -43,3 +43,23 @@ p {
     border-width: medium;
     border: dashed red;
 }
+
+table {
+    border: 3px solid white;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th {
+    border: 2px solid wheat;
+    color: red;
+    font-size: large;
+}
+
+td {
+    border: 2px solid white;
+    color: azure;
+    font-size: medium;
+    text-align: left;
+
+}
