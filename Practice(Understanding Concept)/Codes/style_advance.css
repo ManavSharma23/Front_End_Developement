@@ -52,14 +52,18 @@ table {
 
 th {
     border: 2px solid wheat;
-    color: red;
+    color: cyan;
     font-size: large;
+    height: 50px;
 }
 
 td {
     border: 2px solid white;
-    color: azure;
+    /* color: azure; */
     font-size: medium;
     text-align: left;
+}
 
+tr:hover {
+    color: aquamarine;
 }
