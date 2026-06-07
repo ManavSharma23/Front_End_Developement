@@ -4,7 +4,7 @@ body {
 }
 
 #game {
-    background-color: grey;
+    background-color: lightgrey;
     padding: 15px;
     max-width: fit-content;
     max-height: fit-content;
@@ -28,12 +28,32 @@ body {
 }
 
 #player_stats {
-
-    border-style: solid;
-    border-color: antiquewhite;
-    border-width: 3px;
+    border: 3px solid black;
     display: flex;
-    gap: 15px;
+    gap: 25px;
+    padding: 5px;
+    margin: 10px;
+    border-radius: 5px;
+
 }
 
-#monster_stats {}
+#monster_stats {
+    display: none;
+    border: 3px solid black;
+    padding: 5px;
+    margin: 10px;
+    border-radius: 5px;
+    color: brown;
+    text-align: center;
+
+}
+
+#main_buttons {
+    border: 3px solid black;
+    display: flex;
+    gap: 20px;
+    padding: 5px;
+    margin: 10px;
+    border-radius: 5px;
+
+}
