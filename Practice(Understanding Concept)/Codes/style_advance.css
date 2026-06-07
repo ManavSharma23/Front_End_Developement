@@ -67,3 +67,17 @@ td {
 tr:hover {
     color: aquamarine;
 }
+
+
+/* child relation */
+
+h2.Villain>ol {
+    background-color: antiquewhite;
+    text-shadow: 0cqh;
+    font-size: large;
+    text-rendering: geometricPrecision;
+    color: black;
+}
+
+/* adjacent sibling relation  h2+ b , immediate b after h2 */
+/* general sibling h2~b , everything b after h2  */
