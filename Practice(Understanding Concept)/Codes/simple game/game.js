@@ -32,3 +32,37 @@ go_to_cave.onclick = goCave;
 fight_dragon.onclick = goFight;
 
 
+function goStore() {
+    go_to_store.innerText = "Buy 10 Health (10 Gold)";
+    go_to_cave.innerText = "Buy Weapons";
+    fight_dragon.innerText = "Go to town square";
+    text.innerText = "Welcome To Dragonaise Summersville .\nThe Store of Enchantments and Honor. \n\nWhat would you like to buy?";
+
+    go_to_store.onclick = buyHealth;
+    go_to_cave.onclick = buyWeapons;
+    fight_dragon.onclick = goTown;
+
+}
+
+function goTown() {
+    go_to_store.innerText = "Go To Store";
+    go_to_cave.innerText = "Go to Cave";
+    fight_dragon.innerText = "Fight Dragon";
+    text.innerText = "You are back at the town square.";
+
+    go_to_store.onclick = goStore;
+    go_to_cave.onclick = goCave;
+    fight_dragon.onclick = goFight;
+
+}
+
+
+
+function goCave() {
+
+}
+
+function goFight() {
+
+}
+
