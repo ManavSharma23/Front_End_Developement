@@ -25,6 +25,34 @@ const goldtext = document.querySelector("#Goldtext");
 const monstername = document.querySelector("#MonsterName");
 const monsterhealth = document.querySelector("#monsterhealth");
 
+
+const locations = [
+    {
+        name: "Town Square",
+        "Button Text": ["Go to Store", "Go to Cave", "Fight Dragon"],
+        "button_functions": [goStore, goCave, goFight],
+        text: "You Are In the Town Square . "
+    },
+
+    {
+        name: "store",
+        "Button Text": ["Buy 10 Health (10 Gold)", "Buy Weapons", "Go to Town Square"],
+        "button_functions": [buyHealth, buyWeapons, goTown],
+        text: "Welcome To Dragonaise Summersville .\nThe Store of Enchantments and Honor. \n\nWhat would you like to buy?"
+
+    },
+
+    {
+        name: "Cave",
+        "Button Text": ["Fight Slime", "Fight FangBeast", "Go To Town Square"],
+        "button_functions": [fightSlime, fightFangBeast, goTown],
+        text: "You Enter the Cave. You See some monsters !! \nWho are you going to fight ?",
+
+    }
+
+]
+
+
 //buttons function//
 
 go_to_store.onclick = goStore;
@@ -32,33 +60,36 @@ go_to_cave.onclick = goCave;
 fight_dragon.onclick = goFight;
 
 
-function goStore() {
-    go_to_store.innerText = "Buy 10 Health (10 Gold)";
-    go_to_cave.innerText = "Buy Weapons";
-    fight_dragon.innerText = "Go to town square";
-    text.innerText = "Welcome To Dragonaise Summersville .\nThe Store of Enchantments and Honor. \n\nWhat would you like to buy?";
+function update(locations) {
 
-    go_to_store.onclick = buyHealth;
-    go_to_cave.onclick = buyWeapons;
-    fight_dragon.onclick = goTown;
+    go_to_store.innerText = locations["Button Text"][0];
+    go_to_cave.innerText = locations["Button Text"][1];
+    fight_dragon.innerText = locations["Button Text"][2];
+    text.innerText = locations.text;
+
+    go_to_store.onclick = locations["button_functions"][0];
+    go_to_cave.onclick = locations["button_functions"][1];
+    fight_dragon.onclick = locations["button_functions"][2];
+
+}
+
+
+function goStore() {
+    console.log("goStore clicked");
+    update(locations[1]);
 
 }
 
 function goTown() {
-    go_to_store.innerText = "Go To Store";
-    go_to_cave.innerText = "Go to Cave";
-    fight_dragon.innerText = "Fight Dragon";
-    text.innerText = "You are back at the town square.";
-
-    go_to_store.onclick = goStore;
-    go_to_cave.onclick = goCave;
-    fight_dragon.onclick = goFight;
+    console.log("goTown clicked");
+    update(locations[0]);
 
 }
 
 
-
 function goCave() {
+    console.log("goCave clicked");
+    update(locations[2]);
 
 }
 
@@ -66,3 +97,18 @@ function goFight() {
 
 }
 
+function buyHealth() {
+
+}
+function buyWeapons() {
+
+}
+
+
+function fightSlime() {
+
+}
+
+function fightFangBeast() {
+
+}
