@@ -53,6 +53,31 @@ const locations = [
 ]
 
 
+const Weapons = [
+    {
+        name: "Dagger Of Doom",
+        price: 25,
+        damage: 30
+    },
+
+    {
+        name: "Sword of Labryinth",
+        price: 50,
+        damage: 40
+    },
+    {
+        name: "Staff of Ages",
+        price: 70,
+        damage: 50
+    },
+    {
+        name: "Dark Matter Sword",
+        price: 110,
+        damage: 80
+    },
+
+]
+
 //buttons function//
 
 go_to_store.onclick = goStore;
@@ -98,8 +123,36 @@ function goFight() {
 }
 
 function buyHealth() {
+    if (gold >= 10 && health <= 200) {
+        gold -= 10;
+        goldtext.innerText = gold;
+        if (health < 191) {
+            health += 10;
+            text.innerText = "You bought 10 health.";
+        }
+        else if
+            (health > 190 && health < 200) {
+            health = 200;
+            text.innerText = "Maximum health Reached";
+        }
+
+        else {
+            health = 200;
+            text.innerText = "Your Health is already full!";
+            gold += 10;
+            goldtext.innerText = gold;
+        }
+
+        healthtext.innerText = health;
+
+    }
+    else {
+        text.innerText = "You don't have enough gold to buy health!";
+    }
 
 }
+
+
 function buyWeapons() {
 
 }
