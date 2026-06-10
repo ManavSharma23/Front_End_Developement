@@ -5,6 +5,7 @@ let health = 100;
 let gold = 50;
 
 let current_weapon = 0;
+let current_page = 0;
 
 let fighting;
 
@@ -77,7 +78,6 @@ const Weapons = [
             "Its cursed edge has ended the lives of countless warriors, and even now, the blade radiates an unsettling presence.\n" +
             "Few possess the courage to wield such a weapon\n"
 
-
     },
 
     {
@@ -113,44 +113,51 @@ const store_weapons = [
         page_number: 1,
         "Button Text": ["Next", "Buy", "Leave Store"],
         "button_functions": [goNext, goBuy, goLeave],
-        text: Weapons[0].intro_text,
-        name: Weapons[0].name,
-        price: Weapons[0].price,
-        damage: Weapons[0].damage,
 
     },
     {
         page_number: 2,
         "Button Text": ["Previous", "Next", "Buy", "Leave Store"],
         "button_functions": [goPrevious, goNext, goBuy, goLeave],
-        text: Weapons[1].intro_text,
-        name: Weapons[1].name,
-        price: Weapons[1].price,
-        damage: Weapons[1].damage,
     },
 
     {
         page_number: 3,
         "Button Text": ["Previous", "Next", "Buy", "Leave Store"],
         "button_functions": [goPrevious, goNext, goBuy, goLeave],
-        text: Weapons[2].intro_text,
-        name: Weapons[2].name,
-        price: Weapons[2].price,
-        damage: Weapons[2].damage,
     },
     {
         page_number: 4,
         "Button Text": ["Previous", "Buy", "Leave Store"],
         "button_functions": [goPrevious, goBuy, goLeave],
-        text: Weapons[3].intro_text,
-        name: Weapons[3].name,
-        price: Weapons[3].price,
-        damage: Weapons[3].damage,
     }
 
 ]
 function update_store() {
 
+    text.innerText = Weapons[current_page].intro_text;
+    text.innerText += "\n"
+    text.innerText += "Name : " + Weapons[current_page].name + "\n";
+    text.innerText += "Price : " + Weapons[current_page].price + "\n";
+    text.innerText += "Damage : " + Weapons[current_page].damage + "\n";
+
+    go_to_store.innerText = store_weapons[current_page]["Button Text"][0];
+    go_to_cave.innerText = store_weapons[current_page]["Button Text"][1];
+    fight_dragon.innerText = store_weapons[current_page]["Button Text"][2];
+
+    go_to_store.onclick = store_weapons[current_page]["button_functions"][0];
+    go_to_cave.onclick = store_weapons[current_page]["button_functions"][1];
+    fight_dragon.onclick = store_weapons[current_page]["button_functions"][2];
+
+
+}
+
+function goNext() {
+
+    current_page += 1;
+    if (current_page == 0 || current_page == 3) {
+        inventory_button
+    }
 }
 
 //buttons function//
@@ -279,4 +286,12 @@ function goInventory() {
         }
     }
 
+}
+
+function goNext() {
+
+    current_page += 1;
+    if (current_page == 0 || current_page == 3) {
+        inventory_button
+    }
 }
