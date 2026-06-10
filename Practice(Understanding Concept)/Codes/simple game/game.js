@@ -61,7 +61,7 @@ const Weapons = [
     },
 
     {
-        name: "Sword of Labryinth",
+        name: "Hammer of Labryinth",
         price: 50,
         damage: 40
     },
@@ -154,14 +154,20 @@ function buyHealth() {
 
 
 function buyWeapons() {
+    text.innerText = "Weapon list :\n";
 
-}
+    for (let i = 0; i < Weapons.length; i++) {
+        text.innerText += "Weapon : " + Weapons[i].name + "Price : " + Weapons[i].price + "Damage : " + Weapons[i].damage + "\n"
+        text.innerText += "\n"
 
 
-function fightSlime() {
+    }
 
-}
 
-function fightFangBeast() {
+    function fightSlime() {
 
-}
+    }
+
+    function fightFangBeast() {
+
+    }
