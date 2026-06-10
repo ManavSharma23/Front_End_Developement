@@ -2,7 +2,7 @@
 
 let xp = 0;
 let health = 100;
-let gold = 50;
+let gold = 100;
 
 let current_weapon = 0;
 let current_page = 0;
@@ -177,10 +177,12 @@ function update(locations) {
     go_to_inventory.innerText = locations["Button Text"][3];
     text.innerText = locations.text;
 
+
     go_to_store.onclick = locations["button_functions"][0];
     go_to_cave.onclick = locations["button_functions"][1];
     fight_dragon.onclick = locations["button_functions"][2];
     go_to_inventory.onclick = locations["button_functions"][3];
+    go_to_inventory.style.display = "inline-block";
 
 }
 
@@ -255,6 +257,9 @@ function goPrevious() {
 }
 
 function goBuy() {
+
+    go_to_inventory.style.display = "none";
+
     let available = false;
     if (gold >= Weapons[current_page].price) {
         for (let i = 0; i < inventory.length; i++) {
@@ -282,6 +287,14 @@ function goBuy() {
     else {
         text.innerText = "You don't have enough gold to buy this weapon.";
     }
+
+    go_to_store.innerText = "Back To Weapons"
+    go_to_cave.innerText = "Leave Store"
+    fight_dragon.innerText = "Inventory"
+
+    go_to_store.onclick = buyWeapons;
+    go_to_cave.onclick = goTown;
+    fight_dragon.onclick = goInventory;
 
 }
 
