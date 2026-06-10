@@ -238,10 +238,59 @@ function buyHealth() {
 
 }
 
+//Weapon's Logic//
 
 function buyWeapons() {
     update_store()
 }
+
+function goNext() {
+    current_page += 1;
+    update_store()
+}
+
+function goPrevious() {
+    current_page -= 1;
+    update_store()
+}
+
+function goBuy() {
+    let available = false;
+    if (gold >= Weapons[current_page].price) {
+        for (let i = 0; i < inventory.length; i++) {
+            if (inventory[i].name == Weapons[current_page].name) {
+                available = true;
+                break;
+            }
+        }
+        if (available == false) {
+            gold -= Weapons[current_page].price;
+            text.innerText = "Congratulations On Buying The " + Weapons[current_page].name + ".";
+            text.innerText += "\nYou can equip this weapon from your inventory.";
+            goldtext.innerText = gold;
+            inventory.push({
+                category: "weapon",
+                name: Weapons[current_page].name,
+                damage: Weapons[current_page].damage,
+                price: Weapons[current_page].price,
+            });
+        }
+        else {
+            text.innerText = "\nYou already have this weapon.";
+        }
+    }
+    else {
+        text.innerText = "You don't have enough gold to buy this weapon.";
+    }
+
+}
+
+function goLeave() {
+    goStore()
+}
+
+// +++++++++++++++++++++//
+
 
 function fightSlime() {
 
@@ -280,20 +329,4 @@ function goInventory() {
         }
     }
 
-}
-function goNext() {
-    current_page += 1;
-    update_store()
-}
-
-function goPrevious() {
-    current_page -= 1;
-    update_store()
-}
-
-function goBuy() {
-}
-
-function goLeave() {
-    goStore()
 }
