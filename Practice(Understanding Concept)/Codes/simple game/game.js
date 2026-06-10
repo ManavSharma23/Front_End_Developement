@@ -72,23 +72,37 @@ const Weapons = [
     {
         name: "Dagger Of Doom",
         price: 25,
-        damage: 30
+        damage: 30,
+        intro_text: "Forged in the shadows of a forgotten age, the Dagger Of Doom is said to hunger for battle.\n" +
+            "Its cursed edge has ended the lives of countless warriors, and even now, the blade radiates an unsettling presence.\n" +
+            "Few possess the courage to wield such a weapon\n"
+
+
     },
 
     {
         name: "Hammer of Labryinth",
         price: 50,
-        damage: 40
+        damage: 40,
+        intro_text: "Forged within the depths of the ancient Labyrinth, this mighty hammer once belonged to a giant king.\n" +
+            "Its thunderous blows have crushed countless foes, leaving only shattered armor in their wake.\n" +
+            "Even now, warriors speak its name with awe and fear."
     },
     {
         name: "Staff of Ages",
         price: 70,
-        damage: 50
+        damage: 50,
+        intro_text: "Crafted by the sages of a forgotten era, the Staff of Ages holds the wisdom of centuries." +
+            "Legends say it channels the power of time itself, granting its bearer unmatched mastery." +
+            "Many have sought its secrets, but few have proven worthy."
     },
     {
         name: "Dark Matter Sword",
         price: 110,
-        damage: 80
+        damage: 80,
+        intro_text: "Born from the remnants of a fallen star, the Dark Matter Sword defies the laws of nature.\n" +
+            "Its blade is said to cut through steel, magic, and even the fabric of reality itself.\n" +
+            "Those who wield it command a power feared by gods and mortals alike."
     },
 
 ]
@@ -98,45 +112,43 @@ const store_weapons = [
     {
         page_number: 1,
         "Button Text": ["Next", "Buy", "Leave Store"],
-        "button_functions": [goWeaponPage1, goBuy, goLeave],
-        text: ""
+        "button_functions": [goNext, goBuy, goLeave],
+        text: Weapons[0].intro_text,
+        name: Weapons[0].name,
+        price: Weapons[0].price,
+        damage: Weapons[0].damage,
+
     },
-]
-
-
-const weapon_data = [
-    {
-        page_number: 1,
-        intro_text: "Forged in the shadows of a forgotten age, the Dagger Of Doom is said to hunger for battle.\n" +
-            "Its cursed edge has ended the lives of countless warriors, and even now, the blade radiates an unsettling presence.\n" +
-            "Few possess the courage to wield such a weapon"
-    },
-
     {
         page_number: 2,
-        intro_text: "Forged within the depths of the ancient Labyrinth, this mighty hammer once belonged to a giant king.\n" +
-            "Its thunderous blows have crushed countless foes, leaving only shattered armor in their wake.\n" +
-            "Even now, warriors speak its name with awe and fear."
+        "Button Text": ["Previous", "Next", "Buy", "Leave Store"],
+        "button_functions": [goPrevious, goNext, goBuy, goLeave],
+        text: Weapons[1].intro_text,
+        name: Weapons[1].name,
+        price: Weapons[1].price,
+        damage: Weapons[1].damage,
     },
 
     {
         page_number: 3,
-        intro_text: "Crafted by the sages of a forgotten era, the Staff of Ages holds the wisdom of centuries." +
-            "Legends say it channels the power of time itself, granting its bearer unmatched mastery." +
-            "Many have sought its secrets, but few have proven worthy."
-    }
-    ,
+        "Button Text": ["Previous", "Next", "Buy", "Leave Store"],
+        "button_functions": [goPrevious, goNext, goBuy, goLeave],
+        text: Weapons[2].intro_text,
+        name: Weapons[2].name,
+        price: Weapons[2].price,
+        damage: Weapons[2].damage,
+    },
     {
         page_number: 4,
-        intro_text: "Born from the remnants of a fallen star, the Dark Matter Sword defies the laws of nature.\n" +
-            "Its blade is said to cut through steel, magic, and even the fabric of reality itself.\n" +
-            "Those who wield it command a power feared by gods and mortals alike."
+        "Button Text": ["Previous", "Buy", "Leave Store"],
+        "button_functions": [goPrevious, goBuy, goLeave],
+        text: Weapons[3].intro_text,
+        name: Weapons[3].name,
+        price: Weapons[3].price,
+        damage: Weapons[3].damage,
+    }
 
-    },
 ]
-
-
-
 function update_store() {
 
 }
