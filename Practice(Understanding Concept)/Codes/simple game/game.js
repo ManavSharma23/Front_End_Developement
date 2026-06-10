@@ -75,8 +75,8 @@ const Weapons = [
         price: 25,
         damage: 30,
         intro_text: "Forged in the shadows of a forgotten age, the Dagger Of Doom is said to hunger for battle.\n" +
-            "Its cursed edge has ended the lives of countless warriors, and even now, the blade radiates an unsettling presence.\n" +
-            "Few possess the courage to wield such a weapon\n"
+            "Its cursed edge has ended the lives of countless warriors, and even now, the blade radiates\n" +
+            "an unsettling presence.Few possess the courage to wield such a weapon.\n"
 
     },
 
@@ -86,15 +86,15 @@ const Weapons = [
         damage: 40,
         intro_text: "Forged within the depths of the ancient Labyrinth, this mighty hammer once belonged to a giant king.\n" +
             "Its thunderous blows have crushed countless foes, leaving only shattered armor in their wake.\n" +
-            "Even now, warriors speak its name with awe and fear."
+            "Even now, warriors speak its name with awe and fear.\n"
     },
     {
         name: "Staff of Ages",
         price: 70,
         damage: 50,
-        intro_text: "Crafted by the sages of a forgotten era, the Staff of Ages holds the wisdom of centuries." +
-            "Legends say it channels the power of time itself, granting its bearer unmatched mastery." +
-            "Many have sought its secrets, but few have proven worthy."
+        intro_text: "Crafted by the sages of a forgotten era, the Staff of Ages holds the wisdom of centuries.\n" +
+            "Legends say it channels the power of time itself, granting its bearer unmatched mastery.\n" +
+            "Many have sought its secrets, but few have proven worthy.\n"
     },
     {
         name: "Dark Matter Sword",
@@ -102,7 +102,7 @@ const Weapons = [
         damage: 80,
         intro_text: "Born from the remnants of a fallen star, the Dark Matter Sword defies the laws of nature.\n" +
             "Its blade is said to cut through steel, magic, and even the fabric of reality itself.\n" +
-            "Those who wield it command a power feared by gods and mortals alike."
+            "Those who wield it command a power feared by gods and mortals alike.\n"
     },
 
 ]
@@ -144,20 +144,21 @@ function update_store() {
     go_to_store.innerText = store_weapons[current_page]["Button Text"][0];
     go_to_cave.innerText = store_weapons[current_page]["Button Text"][1];
     fight_dragon.innerText = store_weapons[current_page]["Button Text"][2];
+    if (current_page == 1 || current_page == 2) {
+        go_to_inventory.style.display = "inline-block";
+        go_to_inventory.innerText = store_weapons[current_page]["Button Text"][3];
+        go_to_inventory.onclick = store_weapons[current_page]["button_functions"][3];
+    }
+    else {
+        go_to_inventory.style.display = "none";
+    }
+
 
     go_to_store.onclick = store_weapons[current_page]["button_functions"][0];
     go_to_cave.onclick = store_weapons[current_page]["button_functions"][1];
     fight_dragon.onclick = store_weapons[current_page]["button_functions"][2];
 
 
-}
-
-function goNext() {
-
-    current_page += 1;
-    if (current_page == 0 || current_page == 3) {
-        inventory_button
-    }
 }
 
 //buttons function//
@@ -239,16 +240,9 @@ function buyHealth() {
 
 
 function buyWeapons() {
-    text.innerText = "Weapon list :\n \n";
-
-    for (let i = 0; i < Weapons.length; i++) {
-        text.innerText += (i + 1) + "." + "Weapon : " + Weapons[i].name + "\n"
-        text.innerText += " Price : " + Weapons[i].price + "\n"
-        text.innerText += " Damage : " + Weapons[i].damage + "\n"
-        text.innerText += "\n"
-
-    }
+    update_store()
 }
+
 function fightSlime() {
 
 }
@@ -287,11 +281,19 @@ function goInventory() {
     }
 
 }
-
 function goNext() {
-
     current_page += 1;
-    if (current_page == 0 || current_page == 3) {
-        inventory_button
-    }
+    update_store()
+}
+
+function goPrevious() {
+    current_page -= 1;
+    update_store()
+}
+
+function goBuy() {
+}
+
+function goLeave() {
+    goStore()
 }
