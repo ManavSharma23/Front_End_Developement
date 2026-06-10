@@ -37,7 +37,7 @@ const locations = [
         name: "store",
         "Button Text": ["Buy 10 Health (10 Gold)", "Buy Weapons", "Go to Town Square", "Inventory"],
         "button_functions": [buyHealth, buyWeapons, goTown, goInventory],
-        text: "Welcome To Dragonaise Summersville .\nThe Store of Enchantments and Honor. \n\nWhat would you like to buy?"
+        text: "Welcome To Dragonaise Summersville .\nThe Store of Enchantments and Honor. \n\nWhat would you like to buy?",
 
     },
 
@@ -92,6 +92,54 @@ const Weapons = [
     },
 
 ]
+
+
+const store_weapons = [
+    {
+        page_number: 1,
+        "Button Text": ["Next", "Buy", "Leave Store"],
+        "button_functions": [goWeaponPage1, goBuy, goLeave],
+        text: ""
+    },
+]
+
+
+const weapon_data = [
+    {
+        page_number: 1,
+        intro_text: "Forged in the shadows of a forgotten age, the Dagger Of Doom is said to hunger for battle.\n" +
+            "Its cursed edge has ended the lives of countless warriors, and even now, the blade radiates an unsettling presence.\n" +
+            "Few possess the courage to wield such a weapon"
+    },
+
+    {
+        page_number: 2,
+        intro_text: "Forged within the depths of the ancient Labyrinth, this mighty hammer once belonged to a giant king.\n" +
+            "Its thunderous blows have crushed countless foes, leaving only shattered armor in their wake.\n" +
+            "Even now, warriors speak its name with awe and fear."
+    },
+
+    {
+        page_number: 3,
+        intro_text: "Crafted by the sages of a forgotten era, the Staff of Ages holds the wisdom of centuries." +
+            "Legends say it channels the power of time itself, granting its bearer unmatched mastery." +
+            "Many have sought its secrets, but few have proven worthy."
+    }
+    ,
+    {
+        page_number: 4,
+        intro_text: "Born from the remnants of a fallen star, the Dark Matter Sword defies the laws of nature.\n" +
+            "Its blade is said to cut through steel, magic, and even the fabric of reality itself.\n" +
+            "Those who wield it command a power feared by gods and mortals alike."
+
+    },
+]
+
+
+
+function update_store() {
+
+}
 
 //buttons function//
 
@@ -194,22 +242,27 @@ function goInventory() {
     console.log("Going to Inventory")
     text.innerText = "Welcome To Your Inventory : \n \n"
 
-    text.innerText += "\n Category : Weapons \n \n"
+    text.innerText += "\n• Category : Weapons \n "
+    text.innerText += "------------------------------------- \n"
+
+
     let j = 1;
     for (let i = 0; i < inventory.length; i++) {
         if (inventory[i].category === "weapon") {
-            text.innerText += (j) + ".Name : " + inventory[i].name + "\n"
-            text.innerText += "  Damage : " + inventory[i].damage + "\n"
-            text.innerText += "  Price : " + inventory[i].price + "\n" + "\n"
+            text.innerText += (j) + ". Name : " + inventory[i].name + "\n"
+            text.innerText += "   Damage : " + inventory[i].damage + "\n"
+            text.innerText += "   Price : " + inventory[i].price + "\n" + "\n"
             j++;
         }
     }
     let k = 1;
-    text.innerText += "\n Category : Edibles \n" + "\n"
+    text.innerText += "\n• Category : Edibles \n "
+    text.innerText += "------------------------------------- \n"
+
     for (let i = 0; i < inventory.length; i++) {
         if (inventory[i].category === "edible") {
-            text.innerText += (k) + ".Name : " + inventory[i].name + "\n"
-            text.innerText += "  Quantity : " + inventory[i].quantity + "\n"
+            text.innerText += (k) + ". Name : " + inventory[i].name + "\n"
+            text.innerText += "   Quantity : " + inventory[i].quantity + "\n"
             k++;
         }
     }
