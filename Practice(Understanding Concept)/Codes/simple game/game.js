@@ -6,6 +6,7 @@ let gold = 100;
 
 let current_weapon = 0;
 let current_page = 0;
+let current_health_page = 0;
 
 let fight;
 
@@ -44,25 +45,35 @@ const locations = [
 
     {
         name: "Cave",
-        "Button Text": ["Fight Slime", "Fight FangBeast", "Fight Ogre", "TownSquare"],
+        "Button Text": ["Fight Slime", "Fight FangBeast", "Fight Ogre", "Town Square"],
         "button_functions": [fightSlime, fightFangBeast, fightOgre, goTown],
         text: "You Enter the Cave. You See some monsters !! \nWho are you going to fight ?",
 
-    },
-    {
-        name: "fighting",
+    }
+    , {
+        name: "Fight",
         "Button Text": ["Attack", "Defend", "Run Away", "Inventory"],
         "button_functions": [goAttack, doDefence, goTown, goInventory],
         text: "You are fighting a monster ! \n What would you like to do ?",
+    },
+    {
+        name: "Inventory",
+        "Button Text": ["Use Health", "Change Weapon", "Go Back", "Town Square"],
+        "button_functions": [increaseHealth, changeWeapon, goBack, goTown],
+
     }
 
 ]
 
 let inventory = [
     {
-        category: "edible",
-        name: "Water",
+        category: "Portions",
+        name: "Asmodeuce Elixer",
         quantity: 1,
+        health_increase: 30,
+        intro_text: "Distilled from the forbidden essence of Asmodeuce, Lord of Despair, this crimson elixir was once reserved for his most loyal followers.\n" +
+            "Though its origin is shrouded in mystery, the potion is said to mend flesh and restore vitality with unnatural speed.\n" +
+            "Those who consume it often speak of hearing a faint voice calling from the abyss."
     },
 
     {
@@ -72,10 +83,7 @@ let inventory = [
         damage: 10,
     }
 
-
 ]
-
-
 const Weapons = [
     {
         name: "Dagger Of Doom",
@@ -242,9 +250,15 @@ function goFight() {
     monsterhealth.innerText = monsters[fight].health
     monstername.innerText = monsters[fight].name
     monsterdamage.innerText = monsters[fight].damage
-    monster_stats.style.display = "block";
+    monster_stats.style.display = "flex";
+}
 
+function goAttack() {
+    text.innerText = "The " + monsters[fight].name + "attacks."
 
+}
+
+function doDefence() {
 }
 
 function buyHealth() {
@@ -293,11 +307,6 @@ function goPrevious() {
     update_store()
 }
 
-function goAttack() {
-}
-
-function doDefence() {
-}
 
 function goBuy() {
 
@@ -315,6 +324,7 @@ function goBuy() {
             gold -= Weapons[current_page].price;
             text.innerText = "Congratulations On Buying The " + Weapons[current_page].name + ".";
             text.innerText += "\nYou can equip this weapon from your inventory.";
+
             goldtext.innerText = gold;
             inventory.push({
                 category: "weapon",
@@ -363,11 +373,14 @@ function fightOgre() {
     fight = 2
     goFight()
 }
+function goFightDragon() {
 
+}
 
 function goInventory() {
     console.log("Going to Inventory")
-    text.innerText = "Welcome To Your Inventory : \n \n"
+
+    update(locations[4])
 
     text.innerText += "\n• Category : Weapons \n "
     text.innerText += "------------------------------------- \n"
@@ -383,15 +396,89 @@ function goInventory() {
         }
     }
     let k = 1;
-    text.innerText += "\n• Category : Edibles \n "
+    text.innerText += "\n• Category : Portions \n "
     text.innerText += "------------------------------------- \n"
 
     for (let i = 0; i < inventory.length; i++) {
-        if (inventory[i].category === "edible") {
+        if (inventory[i].category === "Portions") {
             text.innerText += (k) + ". Name : " + inventory[i].name + "\n"
             text.innerText += "   Quantity : " + inventory[i].quantity + "\n"
+            text.innerText += "   Health Restore : " + inventory[i].health_increase + "\n"
             k++;
         }
     }
 
 }
+
+
+function changeWeapon() { }
+function goBack() { }
+
+
+function increaseHealth() {
+}
+
+
+const store_health = [
+    {
+        page_number: 1,
+        "Button Text": ["Next", "Use Portion", "Go Back"],
+        "button_functions": [goNext, increaseHealth, goBack],
+
+    },
+    {
+        page_number: 2,
+        "Button Text": ["Previous", "Next", "Use Portion", "Go Back"],
+        "button_functions": [goPrevious, goNext, increaseHealth, goBack],
+    },
+
+    {
+        page_number: 3,
+        "Button Text": ["Previous", "Next", "Use Portion", "Go Back"],
+        "button_functions": [goPrevious, goNext, increaseHealth, goBack],
+    },
+    {
+        page_number: 4,
+        "Button Text": ["Previous", "Use Portion", "Go Back"],
+        "button_functions": [goPrevious, increaseHealth, goBack],
+
+
+    }
+]
+
+function update_health_area() {
+
+    let portion_array = []
+    for (let i = 0; i < inventory.length; i++) {
+        if (inventory[i].category === "Portions") {
+            portion_array.push(inventory[i]);
+        }
+    }
+
+    text.innerText = portion_array[current_health_page].intro_text;
+    text.innerText += "\n"
+    text.innerText += "Name : " + portion_array[current_health_page].name + "\n";
+    text.innerText += "Quantity : " + portion_array[current_health_page].quantity + "\n";
+    text.innerText += "Health Restore : " + portion_array[current_health_page].health_increase + "\n";
+
+    go_to_store.innerText = store_weapons[current_page]["Button Text"][0];
+    go_to_cave.innerText = store_weapons[current_page]["Button Text"][1];
+    fight_dragon.innerText = store_weapons[current_page]["Button Text"][2];
+    if (current_page == 1 || current_page == 2) {
+        go_to_inventory.style.display = "inline-block";
+        go_to_inventory.innerText = store_weapons[current_page]["Button Text"][3];
+        go_to_inventory.onclick = store_weapons[current_page]["button_functions"][3];
+    }
+    else {
+        go_to_inventory.style.display = "none";
+    }
+
+
+    go_to_store.onclick = store_weapons[current_page]["button_functions"][0];
+    go_to_cave.onclick = store_weapons[current_page]["button_functions"][1];
+    fight_dragon.onclick = store_weapons[current_page]["button_functions"][2];
+
+
+
+}
+
