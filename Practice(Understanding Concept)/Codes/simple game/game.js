@@ -7,7 +7,7 @@ let gold = 100;
 let current_weapon = 0;
 let current_page = 0;
 
-let fighting;
+let fight;
 
 let monster_health;
 
@@ -24,7 +24,7 @@ const goldtext = document.querySelector("#Goldtext");
 
 const monstername = document.querySelector("#MonsterName");
 const monsterhealth = document.querySelector("#monsterhealth");
-
+const monsterdamage = document.querySelector("#monsterdamage");
 
 const locations = [
     {
@@ -44,15 +44,15 @@ const locations = [
 
     {
         name: "Cave",
-        "Button Text": ["Fight Slime", "Fight FangBeast", "Go To Town Square", "Inventory"],
-        "button_functions": [fightSlime, fightFangBeast, goTown, goInventory],
+        "Button Text": ["Fight Slime", "Fight FangBeast", "Fight Ogre", "TownSquare"],
+        "button_functions": [fightSlime, fightFangBeast, fightOgre, goTown],
         text: "You Enter the Cave. You See some monsters !! \nWho are you going to fight ?",
 
     },
     {
         name: "fighting",
-        "Button Text": ["Attack", "Defend", "Portion", "Run Away", "Inventory"],
-        "button_functions": [fightSlime, fightFangBeast, goTown, goInventory],
+        "Button Text": ["Attack", "Defend", "Run Away", "Inventory"],
+        "button_functions": [goAttack, doDefence, goTown, goInventory],
         text: "You are fighting a monster ! \n What would you like to do ?",
     }
 
@@ -149,9 +149,14 @@ const monsters = [
     },
 
     {
-        name: "FangBeast",
+        name: "Fang Beast",
         health: 55,
         damage: 30
+    },
+    {
+        name: "The Ogre Of Despair",
+        health: 110,
+        damage: 60
     }
 ]
 
@@ -189,7 +194,7 @@ function update_store() {
 
 go_to_store.onclick = goStore;
 go_to_cave.onclick = goCave;
-fight_dragon.onclick = goFight;
+fight_dragon.onclick = goFightDragon;
 go_to_inventory.onclick = goInventory;
 
 
@@ -231,6 +236,14 @@ function goCave() {
 }
 
 function goFight() {
+    console.log("goFight clicked");
+    update(locations[3]);
+
+    monsterhealth.innerText = monsters[fight].health
+    monstername.innerText = monsters[fight].name
+    monsterdamage.innerText = monsters[fight].damage
+    monster_stats.style.display = "block";
+
 
 }
 
@@ -278,6 +291,12 @@ function goNext() {
 function goPrevious() {
     current_page -= 1;
     update_store()
+}
+
+function goAttack() {
+}
+
+function doDefence() {
 }
 
 function goBuy() {
@@ -330,17 +349,21 @@ function goLeave() {
 
 
 function fightSlime() {
+    fight = 0
     goFight()
 
 }
 
 function fightFangBeast() {
+    fight = 1
     goFight()
 }
 
-function fightDragon() {
+function fightOgre() {
+    fight = 2
     goFight()
 }
+
 
 function goInventory() {
     console.log("Going to Inventory")
