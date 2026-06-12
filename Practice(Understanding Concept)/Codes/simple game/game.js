@@ -48,6 +48,12 @@ const locations = [
         "button_functions": [fightSlime, fightFangBeast, goTown, goInventory],
         text: "You Enter the Cave. You See some monsters !! \nWho are you going to fight ?",
 
+    },
+    {
+        name: "fighting",
+        "Button Text": ["Attack", "Defend", "Portion", "Run Away", "Inventory"],
+        "button_functions": [fightSlime, fightFangBeast, goTown, goInventory],
+        text: "You are fighting a monster ! \n What would you like to do ?",
     }
 
 ]
@@ -65,6 +71,7 @@ let inventory = [
         price: 0,
         damage: 10,
     }
+
 
 ]
 
@@ -133,6 +140,23 @@ const store_weapons = [
     }
 
 ]
+
+const monsters = [
+    {
+        name: "Slime",
+        health: 30,
+        damage: 15
+    },
+
+    {
+        name: "FangBeast",
+        health: 55,
+        damage: 30
+    }
+]
+
+
+
 function update_store() {
 
     text.innerText = Weapons[current_page].intro_text;
@@ -306,11 +330,16 @@ function goLeave() {
 
 
 function fightSlime() {
+    goFight()
 
 }
 
 function fightFangBeast() {
+    goFight()
+}
 
+function fightDragon() {
+    goFight()
 }
 
 function goInventory() {
