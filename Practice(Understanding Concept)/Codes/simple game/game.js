@@ -12,6 +12,7 @@ let fight;
 
 let monster_health;
 
+let player_history = [];
 
 const go_to_store = document.querySelector("#button1");
 const go_to_cave = document.querySelector("#button2");
@@ -58,8 +59,9 @@ const locations = [
     },
     {
         name: "Inventory",
-        "Button Text": ["Use Health", "Change Weapon", "Go Back", "Town Square"],
+        "Button Text": ["Use Portions", "Change Weapon", "Go Back", "Town Square"],
         "button_functions": [increaseHealth, changeWeapon, goBack, goTown],
+        text: "Welcome To Inventory : \n",
 
     }
 
@@ -71,8 +73,8 @@ let inventory = [
         name: "Asmodeuce Elixer",
         quantity: 1,
         health_increase: 30,
-        intro_text: "Distilled from the forbidden essence of Asmodeuce, Lord of Despair, this crimson elixir was once reserved for his most loyal followers.\n" +
-            "Though its origin is shrouded in mystery, the potion is said to mend flesh and restore vitality with unnatural speed.\n" +
+        intro_text: "This crimson elixir was once reserved for his most loyal followers.\n" +
+            "Its origin is shrouded in mystery, the potion is said to mend flesh and restore vitality.\n" +
             "Those who consume it often speak of hearing a faint voice calling from the abyss."
     },
 
@@ -227,7 +229,6 @@ function update(locations) {
 function goStore() {
     console.log("goStore clicked");
     update(locations[1]);
-
 }
 
 function goTown() {
@@ -416,31 +417,41 @@ function goBack() { }
 
 
 function increaseHealth() {
+    update_health_area()
 }
 
+function goNextHealth() {
+    current_health_page += 1;
+    update_health_area()
+}
+
+function goPreviousHealth() {
+    current_health_page -= 1;
+    update_health_area()
+}
 
 const store_health = [
     {
         page_number: 1,
         "Button Text": ["Next", "Use Portion", "Go Back"],
-        "button_functions": [goNext, increaseHealth, goBack],
+        "button_functions": [goNextHealth, increaseHealth, goBack],
 
     },
     {
         page_number: 2,
         "Button Text": ["Previous", "Next", "Use Portion", "Go Back"],
-        "button_functions": [goPrevious, goNext, increaseHealth, goBack],
+        "button_functions": [goPreviousHealth, goNextHealth, increaseHealth, goBack],
     },
 
     {
         page_number: 3,
         "Button Text": ["Previous", "Next", "Use Portion", "Go Back"],
-        "button_functions": [goPrevious, goNext, increaseHealth, goBack],
+        "button_functions": [goPreviousHealth, goNextHealth, increaseHealth, goBack],
     },
     {
         page_number: 4,
         "Button Text": ["Previous", "Use Portion", "Go Back"],
-        "button_functions": [goPrevious, increaseHealth, goBack],
+        "button_functions": [goPreviousHealth, increaseHealth, goBack],
 
 
     }
@@ -456,29 +467,28 @@ function update_health_area() {
     }
 
     text.innerText = portion_array[current_health_page].intro_text;
-    text.innerText += "\n"
+    text.innerText += "\n \n"
     text.innerText += "Name : " + portion_array[current_health_page].name + "\n";
     text.innerText += "Quantity : " + portion_array[current_health_page].quantity + "\n";
     text.innerText += "Health Restore : " + portion_array[current_health_page].health_increase + "\n";
 
-    go_to_store.innerText = store_weapons[current_page]["Button Text"][0];
-    go_to_cave.innerText = store_weapons[current_page]["Button Text"][1];
-    fight_dragon.innerText = store_weapons[current_page]["Button Text"][2];
-    if (current_page == 1 || current_page == 2) {
+    go_to_store.innerText = store_health[current_health_page]["Button Text"][0];
+    go_to_cave.innerText = store_health[current_health_page]["Button Text"][1];
+    fight_dragon.innerText = store_health[current_health_page]["Button Text"][2];
+
+    if (current_health_page == 1 || current_health_page == 2) {
         go_to_inventory.style.display = "inline-block";
-        go_to_inventory.innerText = store_weapons[current_page]["Button Text"][3];
-        go_to_inventory.onclick = store_weapons[current_page]["button_functions"][3];
+        go_to_inventory.innerText = store_health[current_health_page]["Button Text"][3];
+        go_to_inventory.onclick = store_health[current_health_page]["button_functions"][3];
     }
     else {
         go_to_inventory.style.display = "none";
     }
 
 
-    go_to_store.onclick = store_weapons[current_page]["button_functions"][0];
-    go_to_cave.onclick = store_weapons[current_page]["button_functions"][1];
-    fight_dragon.onclick = store_weapons[current_page]["button_functions"][2];
-
-
+    go_to_store.onclick = store_health[current_health_page]["button_functions"][0];
+    go_to_cave.onclick = store_health[current_health_page]["button_functions"][1];
+    fight_dragon.onclick = store_health[current_health_page]["button_functions"][2];
 
 }
 
