@@ -12,7 +12,6 @@ let fight;
 
 let monster_health;
 
-let player_history = [];
 
 const go_to_store = document.querySelector("#button1");
 const go_to_cave = document.querySelector("#button2");
@@ -77,7 +76,15 @@ let inventory = [
             "Its origin is shrouded in mystery, the potion is said to mend flesh and restore vitality.\n" +
             "Those who consume it often speak of hearing a faint voice calling from the abyss."
     },
-
+    {
+        category: "Portions",
+        name: "Sweat Of Arceus",
+        quantity: 1,
+        health_increase: 15,
+        intro_text: "Few dare question how this sacred liquid was obtained, and fewer still wish to know.\n" +
+            "Despite its unusual origin, the Sweat Of Arceus possesses extraordinary healing properties.\n" +
+            "Those who consume it often swear they hear distant cries from the heavens."
+    },
     {
         category: "weapon",
         name: "Knife",
@@ -223,7 +230,13 @@ function update(locations) {
     go_to_inventory.onclick = locations["button_functions"][3];
     go_to_inventory.style.display = "inline-block";
 
+    previous_location = current_location;
+    current_location = locations;
+
 }
+
+let current_location = locations[0];
+let previous_location = null;
 
 
 function goStore() {
@@ -413,7 +426,6 @@ function goInventory() {
 
 
 function changeWeapon() { }
-function goBack() { }
 
 
 function increaseHealth() {
@@ -491,4 +503,20 @@ function update_health_area() {
     fight_dragon.onclick = store_health[current_health_page]["button_functions"][2];
 
 }
+
+function goBack() {
+
+    if (previous_location != null) {
+
+        let tempoary_store = current_location;
+
+        update(previous_location);
+
+        previous_location = tempoary_store;
+    }
+
+}
+
+
+
 
