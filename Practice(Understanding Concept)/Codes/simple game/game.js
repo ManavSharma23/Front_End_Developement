@@ -471,10 +471,6 @@ function changeWeapon() {
 
 }
 
-
-
-
-
 function increaseHealth() {
     update_health_area()
 }
@@ -608,7 +604,5 @@ function goBack() {
     }
 
 }
-
-
 
 
