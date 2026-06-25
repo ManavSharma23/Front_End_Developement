@@ -7,7 +7,7 @@ let gold = 100;
 let current_weapon = 0;
 let current_page = 0;
 let current_health_page = 0;
-
+let current_weapon_equipped = 0;
 let fight;
 
 let monster_health;
@@ -90,6 +90,10 @@ let inventory = [
         name: "Knife",
         price: 0,
         damage: 10,
+        status: "Equipped",
+        intro_text: "A simple blade carried by countless travelers and forgotten mercenaries.\n" +
+            "Though unremarkable in appearance, its edge has tasted both victory and despair.\n" +
+            "Many legendary warriors began their journey with nothing more than this faithful knife."
     }
 
 ]
@@ -100,7 +104,8 @@ const Weapons = [
         damage: 30,
         intro_text: "Forged in the shadows of a forgotten age, the Dagger Of Doom is said to hunger for battle.\n" +
             "Its cursed edge has ended the lives of countless warriors, and even now, the blade radiates\n" +
-            "an unsettling presence.Few possess the courage to wield such a weapon.\n"
+            "an unsettling presence.Few possess the courage to wield such a weapon.\n",
+        status: "Unequipped"
 
     },
 
@@ -110,7 +115,8 @@ const Weapons = [
         damage: 40,
         intro_text: "Forged within the depths of the ancient Labyrinth, this mighty hammer once belonged to a giant king.\n" +
             "Its thunderous blows have crushed countless foes, leaving only shattered armor in their wake.\n" +
-            "Even now, warriors speak its name with awe and fear.\n"
+            "Even now, warriors speak its name with awe and fear.\n",
+        status: "Unequipped"
     },
     {
         name: "Staff of Ages",
@@ -118,7 +124,8 @@ const Weapons = [
         damage: 50,
         intro_text: "Crafted by the sages of a forgotten era, the Staff of Ages holds the wisdom of centuries.\n" +
             "Legends say it channels the power of time itself, granting its bearer unmatched mastery.\n" +
-            "Many have sought its secrets, but few have proven worthy.\n"
+            "Many have sought its secrets, but few have proven worthy.\n",
+        status: "Unequipped"
     },
     {
         name: "Dark Matter Sword",
@@ -126,7 +133,8 @@ const Weapons = [
         damage: 80,
         intro_text: "Born from the remnants of a fallen star, the Dark Matter Sword defies the laws of nature.\n" +
             "Its blade is said to cut through steel, magic, and even the fabric of reality itself.\n" +
-            "Those who wield it command a power feared by gods and mortals alike.\n"
+            "Those who wield it command a power feared by gods and mortals alike.\n",
+        status: "Unequipped"
     },
 
 ]
@@ -268,7 +276,7 @@ function goFight() {
 }
 
 function goAttack() {
-    text.innerText = "The " + monsters[fight].name + "attacks."
+    text.innerText = "You Attacked The " + monsters[fight].name + "With ";
 
 }
 
@@ -345,6 +353,8 @@ function goBuy() {
                 name: Weapons[current_page].name,
                 damage: Weapons[current_page].damage,
                 price: Weapons[current_page].price,
+                status: Weapons[current_page].status,
+                intro_text: Weapons[current_page].intro_text,
             });
         }
         else {
@@ -425,7 +435,44 @@ function goInventory() {
 }
 
 
-function changeWeapon() { }
+function changeWeapon() {
+
+    let weapon_array = []
+    for (let i = 0; i < inventory.length; i++) {
+        if (inventory[i].category === "weapon") {
+            weapon_array.push(inventory[i]);
+        }
+    }
+
+    text.innerText = weapon_array[current_weapon_equipped].intro_text;
+    text.innerText += "\n \n"
+    text.innerText += "Name : " + weapon_array[current_weapon_equipped].name + "\n";
+    text.innerText += "Damage : " + weapon_array[current_weapon_equipped].damage + "\n";
+    text.innerText += "Price : " + weapon_array[current_weapon_equipped].price + "\n";
+    text.innerText += "Status : " + weapon_array[current_weapon_equipped].status + "\n";
+
+    go_to_store.innerText = weapon_function[current_weapon_equipped]["Button Text"][0];
+    go_to_cave.innerText = weapon_function[current_weapon_equipped]["Button Text"][1];
+    fight_dragon.innerText = weapon_function[current_weapon_equipped]["Button Text"][2];
+
+    if (current_weapon_equipped == 1 || current_weapon_equipped == 2 || current_weapon_equipped == 3) {
+        go_to_inventory.style.display = "inline-block";
+        go_to_inventory.innerText = weapon_function[current_weapon_equipped]["Button Text"][3];
+        go_to_inventory.onclick = weapon_function[current_weapon_equipped]["button_functions"][3];
+    }
+    else {
+        go_to_inventory.style.display = "none";
+    }
+
+
+    go_to_store.onclick = weapon_function[current_weapon_equipped]["button_functions"][0];
+    go_to_cave.onclick = weapon_function[current_weapon_equipped]["button_functions"][1];
+    fight_dragon.onclick = weapon_function[current_health_page]["button_functions"][2];
+
+}
+
+
+
 
 
 function increaseHealth() {
@@ -468,6 +515,51 @@ const store_health = [
 
     }
 ]
+
+const weapon_function = [
+
+    {
+        page_number: 1,
+        "Button Text": ["Next", "Equip", "Go Back"],
+        "button_functions": [goNextWeapon, equipWeapon, goBack],
+    },
+
+    {
+        page_number: 2,
+        "Button Text": ["Previous", "Next", "Equip", "Go Back"],
+        "button_functions": [goPreviousWeapon, goNextWeapon, equipWeapon, goBack],
+    },
+    {
+        page_number: 3,
+        "Button Text": ["Previous", "Next", "Equip", "Go Back"],
+        "button_functions": [goPreviousWeapon, goNextWeapon, equipWeapon, goBack],
+    },
+    {
+        page_number: 4,
+        "Button Text": ["Previous", "Next", "Equip", "Go Back"],
+        "button_functions": [goPreviousWeapon, goNextWeapon, equipWeapon, goBack],
+    },
+    {
+        page_number: 5,
+        "Button Text": ["Previous", "Equip", "Go Back"],
+        "button_functions": [goPreviousWeapon, equipWeapon, goBack],
+    }
+]
+
+function goNextWeapon() {
+    current_weapon_equipped += 1;
+    changeWeapon()
+
+}
+
+function goPreviousWeapon() {
+    current_weapon_equipped -= 1;
+    changeWeapon()
+}
+
+function equipWeapon() {
+
+}
 
 function update_health_area() {
 
