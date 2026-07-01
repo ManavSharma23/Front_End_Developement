@@ -51,6 +51,7 @@ table {
 }
 
 th {
+    
     border: 2px solid wheat;
     color: cyan;
     font-size: large;
@@ -58,6 +59,7 @@ th {
 }
 
 td {
+    
     border: 2px solid white;
     /* color: azure; */
     font-size: medium;
@@ -65,6 +67,7 @@ td {
 }
 
 tr:hover {
+    
     color: aquamarine;
 }
 
